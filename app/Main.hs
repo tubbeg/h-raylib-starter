@@ -25,8 +25,8 @@ drawStuff = do
 
 gameLoop ::  IO()
 gameLoop = do
-  x <- drawStuff
-  unless x $ gameLoop
+  shouldShutDown <- drawStuff
+  unless shouldShutDown $ gameLoop
   -- above is equivalent to:
   --if x then
   --  return ()
@@ -41,7 +41,7 @@ main :: IO ()
 main = do
   y <- initWindow 600 450 "raylib [core] example - basic window"
   setTargetFPS 60
-  x <- windowShouldClose 
-  putStr $ testMyBool x
+  testWindowClose <- windowShouldClose 
+  putStr $ testMyBool testWindowClose
   gameLoop
   closeWindow $ Just y
